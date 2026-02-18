@@ -28,3 +28,5 @@ A modern, AI-powered command center dashboard for monitoring and predicting emer
 - **Frontend/Backend**: Streamlit (Python)
 - **Visualization**: Plotly Express
 - **Data Handling**: Pandas, NumPy
+# emergency-severity-prediction-system
+
