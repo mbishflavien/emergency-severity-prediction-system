@@ -150,3 +150,15 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Ignore large datasets
+data/
+
+# Ignore trained models
+models/
+
+# Ignore Python virtual environment
+.venv/
+
+# Ignore pickle files
+*.pkl
