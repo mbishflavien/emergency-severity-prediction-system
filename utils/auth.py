@@ -3,6 +3,8 @@ import time
 import json
 import os
 import hashlib
+from utils.style_utils import load_css, apply_creative_theme
+from utils.icon_library import get_icon
 
 USER_DB_PATH = "data/users.json"
 
@@ -36,18 +38,53 @@ def require_login():
         st.session_state.logged_in = False
         
     if not st.session_state.logged_in:
-        # FULL SCREEN LOGIN LAYOUT
+        load_css()
+        apply_creative_theme()
+        
+        # PREMIUM LOGIN LAYOUT
         st.markdown(
             """
             <style>
                 [data-testid="stSidebar"] {display: none;} /* Hide Sidebar */
-                .login-container {
-                    max-width: 500px;
+                [data-testid="stHeader"] {display: none;}
+                
+                .stApp {
+                    background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                                url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2000');
+                    background-size: cover;
+                    background-position: center;
+                }
+                
+                .login-card {
+                    background: rgba(30, 41, 59, 0.7);
+                    backdrop-filter: blur(20px);
+                    -webkit-backdrop-filter: blur(20px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 24px;
                     padding: 40px;
-                    border-radius: 12px;
-                    background: #1e293b;
-                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-                    margin: 100px auto;
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                    max-width: 500px;
+                    width: 100%;
+                    margin: 0 auto;
+                }
+                
+                .stTabs [data-baseweb="tab-list"] {
+                    background: transparent;
+                    gap: 15px;
+                }
+                
+                .stTabs [data-baseweb="tab"] {
+                    height: 45px;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 8px;
+                    color: white;
+                    padding: 0 20px;
+                    border: 1px solid transparent;
+                }
+                
+                .stTabs [aria-selected="true"] {
+                    background: var(--accent-blue) !important;
+                    border-color: rgba(255, 255, 255, 0.2) !important;
                 }
             </style>
             """, 
@@ -57,13 +94,23 @@ def require_login():
         users_db = _load_users()
         
         # Centered Container
+        st.markdown("<div style='height: 80px;'></div>", unsafe_allow_html=True)
         _, col, _ = st.columns([1, 2, 1])
         with col:
-            st.title("🚑 EMS Command Center")
-            st.caption("Secure Information System v3.0")
-            st.markdown("---")
+            st.markdown(
+                f"""
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+                        {get_icon("siren", size=64, color="#ef4444")}
+                    </div>
+                    <h1 style="margin: 0; color: white; -webkit-text-fill-color: white;">EMS Command Center</h1>
+                    <p style="color: #94a3b8; font-size: 1.1rem;">Secure Information System v3.0</p>
+                </div>
+                """, 
+                unsafe_allow_html=True
+            )
             
-            tab1, tab2, tab3 = st.tabs(["🔐 Log In", "📝 Sign Up", "🆘 Forgot Password"])
+            tab1, tab2, tab3 = st.tabs(["LOG IN", "SIGN UP", "RECOVER ACCESS"])
 
             # --- LOGIN TAB ---
             with tab1:
@@ -135,9 +182,8 @@ def require_login():
         # Stop execution if not logged in
         st.stop()
         
-    else:
         # User is logged in
-        st.sidebar.markdown(f"✅ **{st.session_state.get('user', 'User')}**")
+        st.sidebar.markdown(f"**{st.session_state.get('user', 'User')}**")
         if st.sidebar.button("Log Out", type="secondary"):
             st.session_state.logged_in = False
             st.rerun()

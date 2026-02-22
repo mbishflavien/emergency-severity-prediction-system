@@ -6,7 +6,7 @@ from utils.icon_library import get_icon, render_icon_html
 # Page Configuration
 st.set_page_config(
     page_title="Emergency Response System",
-    page_icon="🚨",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -177,7 +177,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Local Operator Camera Option
-with st.expander("📷 Activate Local Operator Feed"):
+with st.expander("Activate Local Operator Feed"):
     st.write("Enable local webcam for on-site monitoring.")
     local_cam = st.camera_input("Operator Cam")
     if local_cam:

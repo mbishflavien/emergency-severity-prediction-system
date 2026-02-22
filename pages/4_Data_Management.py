@@ -10,7 +10,7 @@ from utils.model_loader import (
     validate_dataset_columns,
 )
 
-st.set_page_config(page_title="Data | EMS", page_icon="💾", layout="wide")
+st.set_page_config(page_title="Data | EMS", page_icon="", layout="wide")
 load_css()
 require_login()
 

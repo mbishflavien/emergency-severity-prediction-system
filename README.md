@@ -1,4 +1,4 @@
-# Emergency Incident Severity Prediction System 🚨
+# Emergency Incident Severity Prediction System
 
 A modern, AI-powered command center dashboard for monitoring and predicting emergency incident severity.
 

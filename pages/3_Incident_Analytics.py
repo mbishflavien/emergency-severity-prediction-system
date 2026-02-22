@@ -6,7 +6,7 @@ from utils.ui_components import load_css, render_header, icon_header
 from utils.auth import require_login
 from utils.icon_library import get_icon
 
-st.set_page_config(page_title="Analytics | EMS", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Analytics | EMS", page_icon="", layout="wide")
 load_css()
 require_login()
 

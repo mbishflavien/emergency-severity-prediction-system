@@ -12,7 +12,7 @@ from utils.map_utils import (
     create_map_legend_html
 )
 
-st.set_page_config(page_title="Overview | EMS", page_icon="📊", layout="wide")
+st.set_page_config(page_title="Overview | EMS", page_icon="", layout="wide")
 load_css()
 require_login()
 

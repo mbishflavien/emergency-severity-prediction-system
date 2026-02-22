@@ -7,7 +7,7 @@ from utils.icon_library import get_icon
 
 from utils.model_loader import model_instance
 
-st.set_page_config(page_title="Performance | EMS", page_icon="🎯", layout="wide")
+st.set_page_config(page_title="Performance | EMS", page_icon="", layout="wide")
 load_css()
 require_login()
 

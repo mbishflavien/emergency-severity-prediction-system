@@ -7,32 +7,50 @@
 */
 
 :root {
-    /* Color Palette - Slate & Blue (Professional/Enterprise) */
-    --bg-app: #0f172a;
-    /* Slate 900 */
-    --bg-panel: #1e293b;
-    /* Slate 800 */
-    --bg-card: rgba(30, 41, 59, 0.7);
+    /* Default (light) color palette */
+    --bg-app: linear-gradient(135deg,#ffffff 0%, #f7fafc 100%);
+    --bg-panel: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.85);
 
-    --border-subtle: rgba(148, 163, 184, 0.1);
-    /* Slate 400 at 10% */
-    --border-focus: rgba(56, 189, 248, 0.5);
-    /* Sky 400 */
+    --border-subtle: rgba(15, 23, 42, 0.06);
+    --border-focus: rgba(37, 99, 235, 0.18);
 
-    --text-primary: #f1f5f9;
-    /* Slate 100 */
-    --text-secondary: #94a3b8;
-    /* Slate 400 */
+    --text-primary: #0b1220;
+    --text-secondary: #475569;
 
-    --accent-red: #ef4444;
-    --accent-orange: #f97316;
-    --accent-green: #10b981;
-    --accent-blue: #3b82f6;
+    --accent-red: #dc2626;
+    --accent-orange: #ea580c;
+    --accent-green: #16a34a;
+    --accent-blue: #2563eb;
+
+    --glass-bg: rgba(255,255,255,0.6);
 
     /* Spacing & Radius */
     --radius-sm: 4px;
     --radius-md: 8px;
     --radius-lg: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark mode overrides */
+        --bg-app: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+        --bg-panel: rgba(15, 23, 42, 0.85);
+        --bg-card: rgba(30, 41, 59, 0.7);
+
+        --border-subtle: rgba(148, 163, 184, 0.08);
+        --border-focus: rgba(59,130,246,0.16);
+
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+
+        --accent-red: #ef4444;
+        --accent-orange: #f97316;
+        --accent-green: #10b981;
+        --accent-blue: #3b82f6;
+
+        --glass-bg: rgba(30,41,59,0.7);
+    }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -45,6 +63,8 @@ body,
     -webkit-font-smoothing: antialiased;
 }
 
+/* Improve base readability on light backgrounds */
+html, body { font-size: 16px; line-height: 1.45; }
 /* App Background */
 .stApp {
     background-color: var(--bg-app);
@@ -72,7 +92,8 @@ h3 {
 h1 {
     font-weight: 700;
     font-size: 2.2rem;
-    background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+    /* Use subtle blue gradient for better contrast on light mode */
+    background: linear-gradient(180deg, var(--accent-blue) 0%, #7aa7ff 70%);
     -webkit-background-clip: text;
     background-clip: text;
     /* Fix lint: Standard property */
@@ -82,13 +103,14 @@ h1 {
 
 /* Metric Cards - Professional "Data Block" Style */
 div.metric-card {
-    background-color: var(--bg-panel);
+    background-color: var(--bg-card, var(--bg-panel));
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
     padding: 20px 24px;
     position: relative;
     overflow: hidden;
-    transition: all 0.2s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 4px 18px rgba(2,6,23,0.06);
 }
 
 div.metric-card::after {
@@ -105,8 +127,8 @@ div.metric-card::after {
 
 div.metric-card:hover {
     border-color: var(--border-focus);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 35px rgba(2,6,23,0.08);
 }
 
 /* Data Tables (DataFrame) */
@@ -117,8 +139,8 @@ div[data-testid="stDataFrame"] {
 }
 
 div[data-testid="stDataFrame"] th {
-    background-color: #0f172a !important;
-    /* Darker header */
+    background-color: var(--bg-panel) !important;
+    /* Keep header readable and subtle */
     color: var(--text-secondary) !important;
     font-weight: 500;
     text-transform: uppercase;
@@ -127,34 +149,39 @@ div[data-testid="stDataFrame"] th {
 
 /* Interactive Elements (Inputs/Selects) */
 div.stTextInput>div>div>input,
-div.stSelectbox>div>div>div {
-    background-color: var(--bg-app);
+div.stSelectbox>div>div>div,
+div.stNumberInput>div>div>input {
+    background-color: var(--glass-bg, rgba(255,255,255,0.6));
     color: var(--text-primary);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
+    padding: 10px 12px;
 }
 
 div.stTextInput>div>div>input:focus,
-div.stSelectbox>div>div>div:focus-within {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 0 1px var(--accent-blue);
+div.stSelectbox>div>div>div:focus-within,
+div.stNumberInput>div>div>input:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 4px 18px rgba(37,99,235,0.12);
+    outline: none;
 }
 
 /* Primary Button */
 div.stButton>button {
-    background-color: var(--accent-blue);
+    background-color: var(--accent-primary);
     color: white;
     border: none;
-    border-radius: var(--radius-sm);
-    padding: 0.6rem 1.4rem;
-    font-weight: 500;
-    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
-    transition: background-color 0.15s;
+    border-radius: 10px;
+    padding: 0.65rem 1.2rem;
+    font-weight: 600;
+    box-shadow: 0 8px 28px rgba(37,99,235,0.12);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 div.stButton>button:hover {
-    background-color: #2563eb;
-    /* Darker blue */
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(37,99,235,0.16);
+    background-color: #1e40af;
 }
 
 div.stButton>button:active {
@@ -208,4 +235,7 @@ code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
     color: var(--text-secondary);
+    background: rgba(0,0,0,0.03);
+    padding: 6px 8px;
+    border-radius: 4px;
 }
