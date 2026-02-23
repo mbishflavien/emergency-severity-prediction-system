@@ -5,7 +5,7 @@ from utils.model_loader import model_instance
 from utils.auth import require_login
 from utils.icon_library import get_icon, get_incident_type_icon, get_severity_icon
 
-st.set_page_config(page_title="Predict | EMS", page_icon="🔮", layout="wide")
+st.set_page_config(page_title="Predict | EMS", page_icon=None, layout="wide")
 load_css()
 require_login()
 

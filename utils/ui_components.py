@@ -28,9 +28,9 @@ def metric_card(title, value, delta=None, color="white", icon=None):
         # Context: Incidents going DOWN is green (good), UP is red (bad) usually. 
         # Or standard: Up is Green. Let's stick to standard financial style green=up unless specified.
         # But for 'Incidents', Up is bad. Let's assume generic usage for now.
-        delta_char = "↑" if "-" not in str(delta) else "↓"
+        delta_char = "+" if "-" not in str(delta) else ""
         delta_color = "#10b981" if "-" not in str(delta) else "#ef4444"
-        delta_html = f'<span style="color: {delta_color}; font-size: 0.9rem; margin-left: 10px;">{delta_char} {delta}</span>'
+        delta_html = f'<span style="color: {delta_color}; font-size: 0.9rem; margin-left: 10px;">{delta_char}{delta}</span>'
 
     icon_html = ""
     if icon:

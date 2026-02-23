@@ -40,11 +40,11 @@ with col1:
             ok, schema, missing = validate_dataset_columns(df)
 
             if not ok:
-                st.error(f"❌ Missing required columns for `{schema}` schema: {', '.join(missing)}")
+                st.error(f"Missing required columns for `{schema}` schema: {', '.join(missing)}")
                 st.info("Check 'Expected Format' below for the correct structure.")
             else:
                 st.session_state['uploaded_data'] = df
-                st.success(f"✅ File Uploaded & Validated Successfully! (Detected: `{schema}` schema)")
+                st.success(f"File Uploaded & Validated Successfully! (Detected: `{schema}` schema)")
                 
         except Exception as e:
             st.error(f"Error reading file: {e}")

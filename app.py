@@ -6,7 +6,7 @@ from utils.icon_library import get_icon, render_icon_html
 # Page Configuration
 st.set_page_config(
     page_title="Emergency Response System",
-    page_icon="",
+    page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded"
 )
